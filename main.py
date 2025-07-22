@@ -10,7 +10,7 @@ async def root():
   }
 
 @app.get('/recommend/{partNumber}')
-async def predict(partNumber: str, n_items: int = 5):
+async def predict(partNumber: str, n_items: int = 10):
   recomender = RecomenderService()
   recomendations: list[str] = recomender.recomendation(partNumber, n_items)
   
