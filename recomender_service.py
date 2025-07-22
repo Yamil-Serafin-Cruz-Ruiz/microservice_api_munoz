@@ -4,12 +4,12 @@ from typing import Any
 
 class RecomenderService:
   
-  path: str = './model/modelo_recomendacion.pkl'
+  path: str = './model/modelo_recommend.pkl'
 
   def __init__(self):
     self.model: pd.DataFrame = jl.load(self.path)
     
-  def recomendation(self, product_code: str, n: int = 5) -> list[str]:
+  def recomendation(self, product_code: str, n: int = 10) -> list[str]:
     if not self._exists_product_code(product_code):
       return []
 
@@ -17,7 +17,7 @@ class RecomenderService:
     
     return self._get_recomendations(relations)
        
-  def _get_relations(self, product_code: str, n: int = 5) -> Any:
+  def _get_relations(self, product_code: str, n: int = 10) -> Any:
     return self.model[product_code].sort_values(ascending=False).head(n)
   
   def _get_recomendations(self, relations: Any ) -> list[str]:
